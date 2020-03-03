@@ -1,0 +1,134 @@
+swagger: "2.0"
+info:
+  description: This api stores items in a box
+  version: "1.0.0"
+  title: itemBox
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api/v1
+
+# Paths supported by the server application
+paths:
+  /items:
+    get:
+      operationId: itembox.resources.items.read_all
+      tags:
+        - Items
+      summary: Read the entire list of items
+      description: Read the list of items
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of items to get from items
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start gathering items
+          required: false
+      responses:
+        200:
+          description: Successfully read items list operation
+          schema:
+            type: array
+            items:
+              properties:
+                uid:
+                  type: string
+                name:
+                  type: string
+                itemof:
+                  type: string
+
+    post:
+      operationId: itembox.resources.items.create
+      tags:
+        - items
+      summary: Create a item and add it to the items list
+      description: Create a new item in the items list
+      parameters:
+        - name: item
+          in: body
+          description: item to create
+          required: True
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of a item to create
+              itemof:
+                type: string
+                description: Name of a item to create
+      responses:
+        201:
+          description: Successfully created item in list
+
+  /items/{uid}:
+    get:
+      operationId: itembox.resources.items.read_one
+      tags:
+        - items
+      summary: Read one item from the items list
+      description: Read one item from the items list
+      parameters:
+        - name: uid
+          in: path
+          description: UID of the item to get from the list
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read item from items list operation
+          schema:
+            properties:
+              uid:
+                type: string
+              name:
+                type: string
+              itemof:
+                type: string
+
+    put:
+      operationId: itembox.resources.items.update
+      tags:
+        - items
+      summary: Update a item in the items list
+      description: Update a item in the items list
+      parameters:
+        - name: uid
+          in: path
+          description: UID of the item to update in the list
+          type: string
+          required: True
+        - name: item
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              itemof:
+                type: string
+      responses:
+        200:
+          description: Successfully updated item in items list
+
+    delete:
+      operationId: itembox.resources.items.delete
+      tags:
+        - items
+      summary: Delete a item from the items list
+      description: Delete a item
+      parameters:
+        - name: uid
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a item from items list
