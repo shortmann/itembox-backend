@@ -11,6 +11,7 @@ setup(
         "connexion",
         "connexion[swagger-ui]",
         "flask",
+        "flask-cors",
         "flask-sqlalchemy",
         "flask-migrate",
         "flask-marshmallow",
