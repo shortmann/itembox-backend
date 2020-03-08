@@ -2,7 +2,7 @@ connexion
 Flask
 Flask-CLI
 Flask-Cors
-flask-marshmallo
+flask-marshmallow
 Flask-Migrate
 Flask-SQLAlchemy
 marshmallow
