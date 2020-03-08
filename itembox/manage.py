@@ -39,8 +39,10 @@ def init():
 
     # iterate over the ITEMS structure and populate the database
     for item in ITEMS:
-        i = Item(uid=item.get("uid"), name=item.get("name"), itemof='')
-        db.session.add(i)
+        exists = Item.query.filter_by(uid=item.get("uid")).first()
+        if not exists:
+            i = Item(uid=item.get("uid"), name=item.get("name"), itemof='')
+            db.session.add(i)
 
     db.session.commit()
     click.echo("initialized db")
